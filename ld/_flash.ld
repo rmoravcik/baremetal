@@ -2,8 +2,8 @@ SECTIONS {
     . = ORIGIN(FLASH);
     text : {
         KEEP(*(.stack))
-        KEEP(*(.vectors))
-        KEEP(*(.header))
+        KEEP(*(VECTORS))
+        KEEP(*(HEADER))
         KEEP(*(.text))
         . = ALIGN(4);
         *(.text*)

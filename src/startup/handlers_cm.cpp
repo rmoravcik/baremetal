@@ -33,7 +33,7 @@ __attribute__((weak, alias("__stop"))) void DUMMY_handler();
 
 // Vector table for handlers
 // This array will be placed in ".vectors" section defined in linker script.
-__attribute__((section(".vectors"), used)) ptr_func_t __isr_vectors[] = {
+__attribute__((section("VECTORS"), used)) ptr_func_t __isr_vectors[] = {
     RESET_handler,
     NMI_handler,
     HARDFAULT_handler,
@@ -51,11 +51,14 @@ __attribute__((section(".vectors"), used)) ptr_func_t __isr_vectors[] = {
     SYSTICK_handler,
 };
 
-unsigned *header[] __attribute__((section(".header"), used)) = {
-    reinterpret_cast<unsigned*> (0xdeadbeef),
+unsigned *header[] __attribute__((section("HEADER"), used)) = {
+    reinterpret_cast<unsigned*> (0x44512000),
     &Image$$RO$$Base,
     &Image$$RO$$Limit,
 //    __stacktop,
 //    reinterpret_cast<unsigned> (__stack_init2),
     reinterpret_cast<unsigned*> (0xcafecafe),
+    reinterpret_cast<unsigned*> (0),
+    reinterpret_cast<unsigned*> (0),
+    reinterpret_cast<unsigned*> (0),
 };
