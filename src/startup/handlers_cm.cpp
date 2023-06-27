@@ -2,6 +2,11 @@
  * Handlers setup code for Cortex-M.
  */
 
+extern unsigned Image$$RO$$Base;
+extern unsigned Image$$RO$$Limit;
+extern unsigned __stacktop;
+unsigned *__stack_init2 = &__stacktop;
+
 typedef void (*ptr_func_t)();
 
 // Undefined handler is pointing to this function, this stop MCU.
@@ -44,4 +49,13 @@ __attribute__((section(".vectors"), used)) ptr_func_t __isr_vectors[] = {
     DUMMY_handler,
     PENDSV_handler,
     SYSTICK_handler,
+};
+
+unsigned *header[] __attribute__((section(".header"), used)) = {
+    reinterpret_cast<unsigned*> (0xdeadbeef),
+    &Image$$RO$$Base,
+    &Image$$RO$$Limit,
+//    __stacktop,
+//    reinterpret_cast<unsigned> (__stack_init2),
+    reinterpret_cast<unsigned*> (0xcafecafe),
 };

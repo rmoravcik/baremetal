@@ -7,7 +7,7 @@ project(baremetal)
 set(LINKER_SCRIPT "ld/stm32f031x6.ld")
 
 # define CPU OPTIONS
-set(CPU_OPTIONS -mthumb -mcpu=cortex-m0)
+set(CPU_OPTIONS -mthumb -mcpu=cortex-m33)
 
 # optimizations (-O0 -O1 -O2 -O3 -Os -Ofast -Og -flto)
 set(CMAKE_C_FLAGS_DEBUG "-Og -g -DDEBUG")
@@ -62,6 +62,7 @@ add_executable(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME}
     ${CPU_OPTIONS}
     -T${LINKER_SCRIPT}
+    -Wl,-Map=baremetal.map
     -nostartfiles
     m
     # -nostdlib

@@ -1,9 +1,9 @@
 SECTIONS {
     . = ORIGIN(FLASH);
-    .text : {
+    text : {
         KEEP(*(.stack))
         KEEP(*(.vectors))
-        KEEP(*(.vectors*))
+        KEEP(*(.header))
         KEEP(*(.text))
         . = ALIGN(4);
         *(.text*)
@@ -31,3 +31,6 @@ SECTIONS {
         __fini_array_end = .;
     } >FLASH
 }
+
+Image$$RO$$Base = 0x10000000;
+Image$$RO$$Limit = 0x2000;
