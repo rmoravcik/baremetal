@@ -51,12 +51,15 @@ link_directories(
     ${CMAKE_SOURCE_DIR}
 )
 
+enable_language(C ASM)
+
 # list of modules to build final firmware
 add_executable(${PROJECT_NAME}
     src/main.cpp
     src/startup/startup.cpp
     src/startup/stack.cpp
     src/startup/handlers_cm.cpp
+    src/startup/exceptions.s
 )
 
 target_link_libraries(${PROJECT_NAME}

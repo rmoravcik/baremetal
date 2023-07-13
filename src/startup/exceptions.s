@@ -1,0 +1,4 @@
+    .global init
+
+init:
+    nop
